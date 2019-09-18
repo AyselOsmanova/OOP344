@@ -1,0 +1,33 @@
+/*
+Name: Aysel Osmanova
+ID: 123615163
+Email:aosmanova@myseneca.ca
+Data:1.21.2019
+
+*/
+
+
+• the difference between internal and external linkage using examples from 
+  your code
+
+  The main difference is keywords, I used "static" for internal and "extern"
+  for external linkages.
+    
+I use a local variable to store the current item number and starts with the 
+value of an external global variable named INITIAL defined in another translation unit.
+ 
+
+• the execution effect of the code in the process() function that creates the String 
+  object which is inserted into standard output (which member function(s) 
+  does this code call)
+
+ Overloaded operator '<<' defined in
+ String.cpp that insert the member data 'string' into the ostream output.
+
+
+
+• the changes that you made in upgrading your String class.
+
+I used dynamically allocation in String.cpp " astring = new char[sizeof(other_string)]; "
+to support the number of characters needed by the passed string into the String class 
+constructor
