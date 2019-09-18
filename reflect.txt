@@ -1,33 +1,24 @@
-/*
-Name: Aysel Osmanova
-ID: 123615163
-Email:aosmanova@myseneca.ca
-Data:1.21.2019
+•	The reason for using the vector container rather than any other available in the STL.
 
-*/
+        I t is easier way to sort data in a contiguous set of memory.Moreover,
+        vector does not need initial declaration.
+        
 
 
-• the difference between internal and external linkage using examples from 
-  your code
+•	List the STL template functions that you used in your solution.
 
-  The main difference is keywords, I used "static" for internal and "extern"
-  for external linkages.
-    
-I use a local variable to store the current item number and starts with the 
-value of an external global variable named INITIAL defined in another translation unit.
- 
+          pair<T,T> sumOf_a_b() const:
+          accumulate()
+          T median() const:
+          sort()
+          T sigma() const:
+          for_each()
+          
 
-• the execution effect of the code in the process() function that creates the String 
-  object which is inserted into standard output (which member function(s) 
-  does this code call)
+•	Identify where you used lambda expressions.
+           pair<T,T> sumOf_a_b() const:
+           T sigma() const;
+           T slope() const;
 
- Overloaded operator '<<' defined in
- String.cpp that insert the member data 'string' into the ostream output.
-
-
-
-• the changes that you made in upgrading your String class.
-
-I used dynamically allocation in String.cpp " astring = new char[sizeof(other_string)]; "
-to support the number of characters needed by the passed string into the String class 
-constructor
+•	Comment on the ease of programming associated with the STL.
+         STL is the easy way that helps programmer to work with the data coming from container 

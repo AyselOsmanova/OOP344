@@ -1,56 +1,58 @@
-#ifndef _SICT_LIST_H
-#define _SICT_LIST_H
+#ifndef SICT_LIST_H
+#define SICT_LIST_H
+// Workshop 8 - Smart Pointers
+// List.h
+// Chris Szalwinski from Cornel Barna
+// 2019/03/17
+
 #include <iostream>
-#include <cstddef>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <memory>
+#include <utility>
+#include <fstream>
 using namespace std;
-namespace sict
-{
-	template <class T, int N>
-	class List
-	{
-		T array_list[N];
-		size_t num_element = { 0u };
+namespace sict {
+	template <typename T>
+	class List {
+		std::vector<T> list;
 	public:
-		size_t size() const
-		{
-			return num_element;
-		}
-		const T& operator[](size_t i) const
-		{
-			const T& t = array_list[i];
-			return t;
-		}
-		void operator+=(const T& t)
-		{
-			if (num_element < N)
-			{
-				array_list[num_element] = t;
-				num_element++;
+		List() { }
+		List(const char* fn) {
+			std::ifstream file(fn);
+			if (!file)
+				throw std::string("*** Failed to open file ") + std::string(fn) + std::string(" ***");
+			while (file) {
+				T e;
+				if (e.load(file))
+					list.push_back(*new T(e));
 			}
+		}
+		size_t size() const { return list.size(); }
+		const T& operator[](size_t i) const { return list[i]; }
+
+		void operator+=(unique_ptr<T>& price) {
+			list.push_back(*price);
+		}
+
+		void operator+=(const T* price) {
+			list.push_back(*price);
+		}
+
+
+
+		void display(std::ostream& os) const {
+			os << std::fixed << std::setprecision(2);
+			for (auto& e : list)
+				e.display(os);
 		}
 	};
 
-	template<typename T, typename L, typename V, int N>
-	class LVList : public List<T, N>
-	{
-	public:
-
-		V accumulate(const L& label) const
-		{
-			
-		    SummableLVPair<L, V> currentSummable;
-			V sumOfElementsInCurrentLVList =  currentSummable.getInitialValue();
-
-			for (size_t i = 0; i < ((List<T, N>&)*this).size(); ++i)
-			{
-				// If the labels match, append the values
-				if (label == ((List<T, N>&)*this)[i].getLabel())
-					sumOfElementsInCurrentLVList = ((List<T, N>&)*this)[i].sum(label, sumOfElementsInCurrentLVList);
-			}
-
-			return sumOfElementsInCurrentLVList;
-		}
-	};
+	template<typename T>
+	std::ostream& operator<<(std::ostream& os, const List<T>& l) {
+		l.display(os);
+		return os;
+	}
 }
-
 #endif

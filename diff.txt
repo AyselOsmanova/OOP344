@@ -1,0 +1,14 @@
+In line number 13 of your output:
+The output should be:
+       x       y
+       ^
+But your output is: 
+       a       b
+       ^
+
+Unmatched character details:
+The character in column 8 is supposed to be:
+  [x] ASCII code(120)
+but you printed
+  [a] ASCII code(97)
+
